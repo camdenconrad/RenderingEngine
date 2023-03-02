@@ -104,7 +104,7 @@ public class Main {
             //graphics.getCamera().location.z -= 10;
             //cube.rotateY(1);
             //graphics.drawCubeArray();
-            graphics.drawCube(cube);
+            graphics.drawColoredCube(cube);
             graphics.updateUI();
             Thread.sleep(3,0);
 

@@ -78,7 +78,7 @@ public class Image extends JPanel {
 //            }
 //        }
         Graphics2D local = img.createGraphics();
-        local.setColor(Color.BLACK);
+        local.setColor(Color.WHITE);
         local.fillRect(0,0, screenSize.width, screenSize.height);
     }
 
@@ -106,15 +106,36 @@ public class Image extends JPanel {
         local.drawLine((int) p1.getX() + screenSize.width / 2, -1 * (int) p1.getY() + screenSize.height / 2, (int) p2.getX() + screenSize.width / 2, -1 * (int) p2.getY() + screenSize.height / 2);
     }
 
-    public void reset() {
+    public void drawLine(Point3D p, Point3D p3) {
 
-        toDraw.clear();
+        Graphics2D local = img.createGraphics();
+
+        Point2D p1 = p.getPoint2D();
+        Point2D p2 = p3.getPoint2D();
+
+        double distance = Math.sqrt(squared(p.x - p3.x) + squared(p.y - p3.y));
+
+        Color c = new Color(0, 190, 255);
+        //
+        if(p.z + p3.z >= distance) {
+            //return;
+            c = new Color( 24, 0, 99);
+        }
+        local.setColor(c);
+
+        local.drawLine((int) p1.getX() + screenSize.width / 2, -1 * (int) p1.getY() + screenSize.height / 2, (int) p2.getX() + screenSize.width / 2, -1 * (int) p2.getY() + screenSize.height / 2);
+    }
+
+    private double squared(double v) {
+        return v * v;
     }
 
     public void drawCube(Cube3D cube) {
         cube.eulerRotation(1, 'x');
         //cube.eulerRotation(1, 'z');
         cube.eulerRotation(1, 'y');
+
+
 
         // front bottom
         drawLine(cube.fbl.getPoint2D(), cube.fbr.getPoint2D());
@@ -145,10 +166,43 @@ public class Image extends JPanel {
 
         //draw planes
 
+    }
 
-        for(Point3D point : cube.points) {
-            drawPoint2D(point.getPoint2D());
-        }
+    public void drawColoredCube(Cube3D cube) {
+        cube.eulerRotation(1, 'x');
+        cube.eulerRotation(1, 'z');
+        cube.eulerRotation(1, 'y');
+
+
+
+        // front bottom
+        drawLine(cube.fbl, cube.fbr);
+        // front top
+        drawLine(cube.ftl, cube.ftr);
+        // front left
+        drawLine(cube.fbl, cube.ftl);
+        // front right
+        drawLine(cube.fbr, cube.ftr);
+
+        // back bottom
+        drawLine(cube.bbl, cube.bbr);
+        // back top
+        drawLine(cube.btl, cube.btr);
+        // back left
+        drawLine(cube.bbl, cube.btl);
+        // back right
+        drawLine(cube.bbr, cube.btr);
+
+        // left bottom side
+        drawLine(cube.fbl, cube.bbl);
+        // right bottom side
+        drawLine(cube.fbr, cube.bbr);
+        // left top side
+        drawLine(cube.ftl, cube.btl);
+        // right top side
+        drawLine(cube.ftr, cube.btr);
+
+        //draw planes
 
 
     }
