@@ -7,7 +7,6 @@ public class Point3D {
         this.y = y;
         this.z = z;
     }
-
     public Point2D getPoint2D() {
 
         return new Point2D(x / (1 + (z * 0.0001)), y / (1 + (z * 0.0001)));
@@ -42,21 +41,29 @@ public class Point3D {
         return "(" + x + ", " + y + ", " + z + ")";
     }
 
-    public void eulerRotation(double theta, char axis) {
-        if(axis == 'z') {
-            y = (y * Math.cos(Math.toRadians(theta))) - (x * Math.sin(Math.toRadians(theta)));
-            x = (x * Math.cos(Math.toRadians(theta))) + (y * Math.sin(Math.toRadians(theta)));
-            return;
-        }
-        if(axis == 'x') {
-            z = (z * Math.cos(Math.toRadians(theta))) - (y * Math.sin(Math.toRadians(theta)));
-            y = (y * Math.cos(Math.toRadians(theta))) + (z * Math.sin(Math.toRadians(theta)));
-            return;
-        }
-        if(axis == 'y') {
-            x = (x * Math.cos(Math.toRadians(theta))) - (z * Math.sin(Math.toRadians(theta)));
-            z = (z * Math.cos(Math.toRadians(theta))) + (x * Math.sin(Math.toRadians(theta)));
-            return;
-        }
+    public void eulerRotation(double roll, double pitch, double yaw) {
+
+        y = (y * Math.cos(Math.toRadians(roll))) - (x * Math.sin(Math.toRadians(roll)));
+        x = (x * Math.cos(Math.toRadians(roll))) + (y * Math.sin(Math.toRadians(roll)));
+
+        z = (z * Math.cos(Math.toRadians(pitch))) - (y * Math.sin(Math.toRadians(pitch)));
+        y = (y * Math.cos(Math.toRadians(pitch))) + (z * Math.sin(Math.toRadians(pitch)));
+
+        x = (x * Math.cos(Math.toRadians(yaw))) - (z * Math.sin(Math.toRadians(yaw)));
+        z = (z * Math.cos(Math.toRadians(yaw))) + (x * Math.sin(Math.toRadians(yaw)));
+    }
+
+    public void quaternionRotation(double roll, double pitch, double yaw) {
+
+        Quaternion quaternion = new Quaternion(0, x, y, z);
+        quaternion.toQuaternion(roll, pitch, yaw, x, y, z);
+
+        x = quaternion.getY();
+        y = quaternion.getY();
+        z = quaternion.getZ();
+
+       // y = (y * Math.cos(Math.toRadians(roll))) - (x * Math.sin(Math.toRadians(roll)));
+     //   x = (x * Math.cos(Math.toRadians(roll))) + (y * Math.sin(Math.toRadians(roll)));
+
     }
 }

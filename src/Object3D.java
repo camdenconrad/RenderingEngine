@@ -1,4 +1,3 @@
-public class Object3D
-{
+public class Object3D {
 
 }

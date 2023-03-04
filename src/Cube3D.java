@@ -1,28 +1,22 @@
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Cube3D extends Object3D {
 
     ArrayList<Point3D> points = new ArrayList<>();
-
     // front
     Point3D fbl;
     Point3D fbr;
-
     Point3D ftl;
     Point3D ftr;
 
     // back
     Point3D bbl;
     Point3D bbr;
-
     Point3D btl;
     Point3D btr;
-
     Point3D center;
-    int size = 0;
 
-    public int random = ThreadLocalRandom.current().nextInt(9);
+    int size = 0;
 
     public Cube3D(Point3D center, int size) {
         this.center = center;
@@ -64,21 +58,33 @@ public class Cube3D extends Object3D {
 
         // back
         bbl = new Point3D(cx - x, cy - y, cz + z);
-        bbr  = new Point3D(cx + x, cy - y, cz + z);
+        bbr = new Point3D(cx + x, cy - y, cz + z);
 
         btl = new Point3D(cx - x, cy + y, cz + z);
-        btr  = new Point3D(cx + x, cy + y, cz + z);
+        btr = new Point3D(cx + x, cy + y, cz + z);
     }
 
-    public void eulerRotation(double angle, char axis) {
-        fbl.eulerRotation(angle, axis);
-        fbr.eulerRotation(angle, axis);
-        ftl.eulerRotation(angle, axis);
-        ftr.eulerRotation(angle, axis);
+    public void eulerRotation(double roll, double pitch, double yaw) {
+        fbl.eulerRotation(roll, pitch, yaw);
+        fbr.eulerRotation(roll, pitch, yaw);
+        ftl.eulerRotation(roll, pitch, yaw);
+        ftr.eulerRotation(roll, pitch, yaw);
 
-        bbl.eulerRotation(angle, axis);
-        bbr.eulerRotation(angle, axis);
-        btl.eulerRotation(angle, axis);
-        btr.eulerRotation(angle, axis);
+        bbl.eulerRotation(roll, pitch, yaw);
+        bbr.eulerRotation(roll, pitch, yaw);
+        btl.eulerRotation(roll, pitch, yaw);
+        btr.eulerRotation(roll, pitch, yaw);
+    }
+
+    public void quaternionRotation(double roll, double pitch, double yaw) {
+        fbl.quaternionRotation(roll, pitch, yaw);
+        fbr.quaternionRotation(roll, pitch, yaw);
+        ftl.quaternionRotation(roll, pitch, yaw);
+        ftr.quaternionRotation(roll, pitch, yaw);
+
+        bbl.quaternionRotation(roll, pitch, yaw);
+        bbr.quaternionRotation(roll, pitch, yaw);
+        btl.quaternionRotation(roll, pitch, yaw);
+        btr.quaternionRotation(roll, pitch, yaw);
     }
 }

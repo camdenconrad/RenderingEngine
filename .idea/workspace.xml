@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2da9cf3a-e192-458b-ba33-91e5394eb862" name="Changes" comment="First commit">
+    <list default="true" id="2da9cf3a-e192-458b-ba33-91e5394eb862" name="Changes" comment="Added colors to rendering">
+      <change afterPath="$PROJECT_DIR$/src/Quaternion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sphere3D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Vector3D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cube3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cube3D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Point3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Point3D.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +75,10 @@
       <workItem from="1677707073459" duration="16890000" />
       <workItem from="1677724863025" duration="1683000" />
       <workItem from="1677727456157" duration="3754000" />
-      <workItem from="1677773693045" duration="4591000" />
+      <workItem from="1677773693045" duration="16148000" />
+      <workItem from="1677804767946" duration="1432000" />
+      <workItem from="1677807925654" duration="378000" />
+      <workItem from="1677880711833" duration="8843000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1677776879625</created>
@@ -77,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677776879625</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added colors to rendering">
+      <created>1677778354875</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1677778354875</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -85,6 +102,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit" />
+    <MESSAGE value="Added colors to rendering" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added colors to rendering" />
   </component>
 </project>

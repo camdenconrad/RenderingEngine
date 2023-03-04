@@ -1,4 +1,6 @@
 public class Camera {
+    Point3D location;
+
     public Camera(double x, double y, double z) {
         this.location = new Point3D(x, y, z);
     }
@@ -11,11 +13,10 @@ public class Camera {
         this.location = location;
     }
 
-    Point3D location;
-
     public void moveUp() {
         this.location.y += 10;
     }
+
     public void moveDown() {
         this.location.y -= 10;
     }
@@ -23,6 +24,7 @@ public class Camera {
     public void moveRight() {
         this.location.x += 10;
     }
+
     public void moveLeft() {
         this.location.x -= 10;
     }

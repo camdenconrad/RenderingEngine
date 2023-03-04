@@ -7,27 +7,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Image extends JPanel {
     private final int width;
     private final int height;
-    private double theta = 0;
-
-    public Camera getCamera() {
-        return camera;
-    }
-
     private final Camera camera;
-
-    public BufferedImage getImg() {
-        return img;
-    }
-
     private final BufferedImage img;
     private final ArrayList<Point> toDraw = new ArrayList<Point>();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    //protected ArrayList<Node> nodes = new ArrayList<>();
-
+    private double theta = 0;
     public Image(int width, int height) {
         this.width = width;
         this.height = height;
-        camera = new Camera(0,0,0);
+        camera = new Camera(0, 0, 0);
 
 
         img = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
@@ -36,6 +24,15 @@ public class Image extends JPanel {
                 img.setRGB(x, y, Color.BLACK.getRGB());
             }
         }
+    }
+
+    public Camera getCamera() {
+        return camera;
+    }
+    //protected ArrayList<Node> nodes = new ArrayList<>();
+
+    public BufferedImage getImg() {
+        return img;
     }
 
     @Override
@@ -65,6 +62,13 @@ public class Image extends JPanel {
         }
     }
 
+    public void drawPx(Point2D p, Color c) {
+        try {
+            img.setRGB((int) (p.x + screenSize.width / 2), (int) (p.y + screenSize.height / 2), c.getRGB());
+        } catch (IndexOutOfBoundsException ignored) {
+        }
+    }
+
 //    public void drawPx(Point p) {
 //        img.setRGB(p.x, p.y, Color.ORANGE.getRGB());
 //    }
@@ -79,7 +83,7 @@ public class Image extends JPanel {
 //        }
         Graphics2D local = img.createGraphics();
         local.setColor(Color.WHITE);
-        local.fillRect(0,0, screenSize.width, screenSize.height);
+        local.fillRect(0, 0, screenSize.width, screenSize.height);
     }
 
     public void update() {
@@ -91,11 +95,11 @@ public class Image extends JPanel {
 
         Graphics2D local = img.createGraphics();
         int random = ThreadLocalRandom.current().nextInt(9);
-       // if(random < 5) {
-            local.setColor(new Color(125,252,254));
-      //  } else {
-            //local.setColor(new Color(223, 116, 12));
-      //  }
+        // if(random < 5) {
+        local.setColor(new Color(125, 252, 254));
+        //  } else {
+        //local.setColor(new Color(223, 116, 12));
+        //  }
 
 //        p1.x += camera.location.x;
 //        p2.x += camera.location.x;
@@ -117,9 +121,10 @@ public class Image extends JPanel {
 
         Color c = new Color(0, 190, 255);
         //
-        if(p.z + p3.z >= distance) {
+        if (p.z + p3.z > distance) {
+
+            c = new Color(24, 0, 99);
             //return;
-            c = new Color( 24, 0, 99);
         }
         local.setColor(c);
 
@@ -131,11 +136,6 @@ public class Image extends JPanel {
     }
 
     public void drawCube(Cube3D cube) {
-        cube.eulerRotation(1, 'x');
-        //cube.eulerRotation(1, 'z');
-        cube.eulerRotation(1, 'y');
-
-
 
         // front bottom
         drawLine(cube.fbl.getPoint2D(), cube.fbr.getPoint2D());
@@ -169,11 +169,6 @@ public class Image extends JPanel {
     }
 
     public void drawColoredCube(Cube3D cube) {
-        cube.eulerRotation(1, 'x');
-        cube.eulerRotation(1, 'z');
-        cube.eulerRotation(1, 'y');
-
-
 
         // front bottom
         drawLine(cube.fbl, cube.fbr);
@@ -216,21 +211,42 @@ public class Image extends JPanel {
 
     public void drawCubeArray() {
         Cube3D[][][] cubes = new Cube3D[30][30][3];
-        for(int i = -15; i < 15; i++) {
-            for(int j = -15; j < 15; j++) {
-                for(int k = 0; k < 3; k++) {
+        for (int i = -15; i < 15; i++) {
+            for (int j = -15; j < 15; j++) {
+                for (int k = 0; k < 3; k++) {
                     cubes[i + 15][j + 15][k] = new Cube3D(new Point3D(i * 10 + camera.location.x, j * 10 + camera.location.y, 0 + (k * 100) + camera.location.z), 100);
                 }
             }
         }
 
-        for(int i = 0; i < 30; i++) {
-            for(int j = 0; j < 30; j++) {
-                for(int k = 0; k < 3; k++) {
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 30; j++) {
+                for (int k = 0; k < 3; k++) {
                     drawCube(cubes[i][j][k]);
                 }
             }
         }
         theta++;
+    }
+
+    public void drawSphere(Sphere3D sphere) {
+//        for(Point3D p : sphere.points) {
+//            drawPx(p.getPoint2D(), Color.BLUE);
+//        }
+
+        for(int i = 0; i < sphere.points.size() - 1; i++) {
+            drawLine(sphere.points.get(i).getPoint2D(), sphere.points.get(i + 1).getPoint2D());
+        }
+        drawLine(sphere.points.get(sphere.points.size() - 1).getPoint2D(), sphere.points.get(0).getPoint2D());
+
+    }
+
+    public void drawColoredSphere(Sphere3D sphere) {
+        for(Point3D p : sphere.points) {
+            if(!(p.z >= sphere.size / 2.)) {
+                drawPx(p.getPoint2D(), Color.BLUE);
+            }
+        }
+
     }
 }
